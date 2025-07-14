@@ -2,5 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
 def index(request):
-    return HttpResponse( "Welcome to Cameroonian Cuisine!")
+    return HttpResponse( "Welcome to The Cameroonian Table!") # updated to the new restaurant name.
+
 
