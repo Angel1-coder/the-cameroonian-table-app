@@ -1,4 +1,4 @@
-# recipes/models.py
+# dishes/models.py
 
 from django.db import models
 from django.contrib.auth.models import User # Import Django's built-in User model for dish authorship.
@@ -46,3 +46,4 @@ class Dish(models.Model):
     def __str__(self):
         return self.title # Returns the dish title for object representation.
     
+    # Force update
