@@ -1,29 +1,31 @@
-from django.contrib import admin
-
-# recipes/admin.py
+# dishes/admin.py
 
 from django.contrib import admin
-from .models import Category, Dish # Import our new Category and Dish models.
+from .models import Category, Dish # Importiere unsere neuen Modelle Category und Dish
 
-# Register your models here.
-# This makes the Category and Dish models visible and manageable in the Django admin interface.
+# Hier registrieren wir unsere Modelle.
+# Das macht die Category- und Dish-Modelle im Django-Admin-Interface sichtbar und verwaltbar.
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    # Displays the 'name' field in the admin list view for Category objects.
+    # Optional: Anpassen, wie Category-Objekte in der Admin-Liste angezeigt werden.
+    # Wir wollen einfach nur den Namen sehen.
     list_display = ('name',)
-    # Enables searching by the 'name' field in the admin.
+    # Ermöglicht die Suche nach Kategorienamen.
     search_fields = ('name',)
 
 @admin.register(Dish)
 class DishAdmin(admin.ModelAdmin):
-    # Customizes the fields displayed in the admin list view for Dish objects.
+    # Anpassen, welche Felder in der Liste der Gerichte im Admin angezeigt werden.
+    # So haben wir schnell einen Überblick über Titel, Kategorie, Status, Erstellungsdatum und Verfasser.
     list_display = ('title', 'category', 'status', 'created_on', 'author')
-    # Enables searching by 'title' and 'description' fields.
+    # Ermöglicht die Suche nach Titel und Beschreibung des Gerichts.
     search_fields = ('title', 'description')
-    # Adds filters to the sidebar for 'status', 'created_on', and 'category'.
+    # Fügt Filter in der Seitenleiste hinzu, um Gerichte nach Status, Erstellungsdatum und Kategorie zu filtern.
     list_filter = ('status', 'created_on', 'category')
-    # Automatically populates the 'slug' field based on the 'title' input.
+    # Das ist super praktisch! Wenn wir einen Titel eingeben, wird der Slug automatisch ausgefüllt.
+    # Das spart Tipparbeit und hilft bei SEO-freundlichen URLs.
     prepopulated_fields = {'slug': ('title',)}
-    # Adds a date-based drilldown navigation for 'created_on'.
+    # Fügt eine Datums-Hierarchie hinzu, um Gerichte nach Jahr, Monat, Tag zu durchsuchen.
     date_hierarchy = 'created_on'
+    
