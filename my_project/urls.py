@@ -1,24 +1,13 @@
-"""
-URL configuration for my_project project.
+# my_project/urls.py
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
-from dishes import views as index_views
+from dishes import views as dishes_views
 
 urlpatterns = [
-    path('', index_views.index, name='index'),
-    path('admin/', admin.site.urls),
+    # This path routes the root URL ('') to the 'index' view in my 'dishes' app.
+    # I've named it 'home' for easy reference in my templates.
+    path('', dishes_views.index, name='home'), 
+    # This path provides access to Django's built-in administration site.
+    path('admin/', admin.site.urls), 
 ]
