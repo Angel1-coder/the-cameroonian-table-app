@@ -8,38 +8,162 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            background-color: #f8f8f8;
+            background-color: #f8f8f8; /* Ein heller, neutraler Hintergrund */
             color: #333;
             line-height: 1.6;
         }
-        .header {
-            background-color: #ffcc80;
-            color: #4a2c0f;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        /* Styling für die Navigationsleiste */
+        .navbar {
+            background-color: #ffffff; /* Weißer Hintergrund für die Navbar */
+            padding: 10px 20px; /* UPDATED: Weniger Padding */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: sticky; /* Lässt die Navbar oben kleben */
+            top: 0;
+            z-index: 1000; /* Stellt sicher, dass sie über anderem Inhalt bleibt */
         }
+        /* Styling für den Markennamen in der Navbar (jetzt schwarz) */
+        .navbar-brand {
+            color: #000000; /* Schwarzer Text für Kontrast auf Weiß */
+            font-size: 1.6em; /* UPDATED: Kleinere Schriftgröße */
+            font-weight: bold;
+            text-decoration: none;
+            flex-grow: 1; /* Ermöglicht es, verfügbaren Platz einzunehmen */
+            text-align: center; /* Zentriert den Text innerhalb seines Flex-Elements */
+            transition: color 0.2s ease-in-out; /* Sanfter Übergang für Hover */
+        }
+        .navbar-brand:hover {
+            color: #ff8c00; /* Helles Orange beim Hover */
+        }
+        /* Styling für die Navigationslinks */
+        .navbar-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            margin-left: auto; /* Schiebt die Links ganz nach rechts */
+        }
+        .navbar-links li {
+            margin-left: 15px; /* UPDATED: Weniger Abstand zwischen den Links */
+        }
+        .navbar-links a {
+            color: #5a2d00; /* Dunklerer Text für Kontrast auf Weiß */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95em; /* UPDATED: Kleinere Schriftgröße für Links */
+            transition: color 0.2s ease-in-out;
+        }
+        .navbar-links a:hover {
+            color: #ff8c00; /* Helles Orange beim Hover für bessere Sichtbarkeit */
+        }
+
+        /* Responsive Anpassungen für Navbar */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 20px; /* Konsistentes Padding für Mobil */
+            }
+            .navbar-brand {
+                text-align: left; /* Links ausrichten auf kleineren Bildschirmen */
+                flex-grow: 0; /* Nicht wachsen auf kleineren Bildschirmen */
+                width: 100%; /* Volle Breite für Ausrichtung */
+                font-size: 1.5em; /* Etwas kleiner auf Mobil */
+            }
+            .navbar-links {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 10px; /* UPDATED: Weniger Abstand oben */
+                display: none; /* Standardmäßig ausgeblendet auf kleinen Bildschirmen */
+                margin-left: 0; /* Automatischen Rand auf kleinen Bildschirmen entfernen */
+            }
+            .navbar-links.active {
+                display: flex; /* Anzeigen, wenn aktiv */
+            }
+            .navbar-links li {
+                margin: 8px 0; /* UPDATED: Weniger vertikaler Abstand */
+            }
+            .navbar-links a {
+                font-size: 1em; /* Etwas größere Schrift auf Mobil für Lesbarkeit */
+            }
+            .menu-toggle {
+                display: block;
+                color: #5a2d00; /* Dunkleres Hamburger-Symbol auf Weiß */
+                font-size: 1.8em; /* UPDATED: Etwas kleineres Hamburger-Symbol */
+                cursor: pointer;
+                align-self: flex-end;
+                position: absolute;
+                top: 10px; /* UPDATED: Angepasste Position */
+                right: 20px;
+            }
+        }
+        /* Menü-Toggle auf größeren Bildschirmen ausblenden */
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Header-Styling OHNE Hintergrundbild */
+        .header {
+            background-color: #ffcc80; /* Hintergrundfarbe, da kein Bild mehr */
+            color: #4a2c0f; /* Textfarbe für den Header */
+            padding: 100px 20px; /* Reichlich Polsterung für Inhalt */
+            text-align: center;
+            position: relative; /* Für die Positionierung des Pseudo-Elements benötigt */
+            z-index: 1; /* Stellt sicher, dass Inhalt über Hintergrundeffekten bleibt */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Dezenter Schatten */
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Overlay für bessere Lesbarkeit des Textes auf dem Header-Bild (entfernt, da kein Bild) */
+        .header::before {
+            content: none; /* Entfernt das Overlay */
+        }
+
         .header h1 {
             margin-top: 0;
-            font-size: 3em;
+            font-size: 3.5em; /* Größere Schrift für den Haupttitel */
+            color: #5a2d00; /* Dunklerer Text für besseren Kontrast auf hellem Hintergrund */
+            text-shadow: none; /* Entfernt Textschatten, da kein Bild */
+        }
+        .header p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #4a2c0f; /* Dunklerer Text für besseren Kontrast */
+            text-shadow: none; /* Entfernt Textschatten */
+        }
+
+        /* Styling für den neuen Vision-Abschnitt */
+        .vision-section {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .vision-section h2 {
             color: #5a2d00;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ffcc80;
+            padding-bottom: 10px;
+            display: inline-block; /* Für die Unterstreichung, die sich an den Text anpasst */
         }
-        .hero-image-container {
-            width: 100%;
-            max-height: 400px;
-            overflow: hidden;
-            margin-bottom: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        .vision-section p {
+            font-size: 1.1em;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+
         .content-section {
             padding: 20px;
             max-width: 1200px;
@@ -54,13 +178,13 @@
             border-bottom: 2px solid #ffcc80;
             padding-bottom: 10px;
         }
-        .item-container { /* General container for both dishes and drinks */
+        .item-container { /* Allgemeiner Container für Gerichte und Getränke */
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
-        .item-card { /* General card for both dishes and drinks */
+        .item-card { /* Allgemeine Karte für Gerichte und Getränke */
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -111,13 +235,31 @@
     </style>
 </head>
 <body>
+    <!-- Navigationsleiste -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">The Cameroonian Table</a>
+        <div class="menu-toggle" id="mobile-menu">
+            &#9776; <!-- Hamburger-Symbol -->
+        </div>
+        <ul class="navbar-links" id="navbar-links">
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Reserve Table</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header-Bereich ohne Hintergrundbild, mit Haupt-Willkommenstext -->
     <div class="header">
         <h1>Welcome to The Cameroonian Table!</h1>
         <p>Savor the authentic flavors of Cameroon.</p>
     </div>
 
-    <div class="hero-image-container">
-        <img src="https://placehold.co/1200x400/FFD700/8B4513?text=Authentic+Cameroonian+Cuisine" alt="Vibrant Cameroonian Food Market" class="hero-image" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/cccccc/333333?text=Image+Not+Available';">
+    <!-- Unser Vision-Abschnitt außerhalb des Headers -->
+    <div class="vision-section">
+        <h2>Our Vision: Revolutionizing African Cuisine</h2>
+        <p>At The Cameroonian Table, we believe in bringing the vibrant and diverse flavors of Cameroon to the world. Geographically positioned at the crossroads of Central and West Africa, Cameroon's cuisine is a melting pot of influences, making it uniquely rich and flavorful. We are dedicated to popularizing this culinary heritage, offering an authentic yet modern dining experience.</p>
     </div>
 
     <div class="content-section">
@@ -153,5 +295,14 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- JavaScript für den mobilen Menü-Toggle -->
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            var navbarLinks = document.getElementById('navbar-links');
+            navbarLinks.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
+
