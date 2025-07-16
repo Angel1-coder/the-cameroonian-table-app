@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dishes',
+    'dishes', #I've added my 'dishes' app to the list of installed applications.
 ]
 
 MIDDLEWARE = [
