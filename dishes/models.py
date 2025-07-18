@@ -1,7 +1,7 @@
 # dishes/models.py
 
 from django.db import models
-from django.contrib.auth.models import User # Imports Django's built-in User model for dish authorship.
+from django.contrib.auth.models import User # Import Django's built-in User model for dish authorship.
 
 # Defines categories for menu items (e.g., Appetizers, Main Courses, Desserts, Drinks, etc.).
 # Using a separate model for categories promotes data normalization and easier management.
@@ -16,7 +16,7 @@ class Category(models.Model):
         return self.name # Returns the category name for display.
 
 # Represents a single dish on the restaurant's menu.
-class Dishes(models.Model): # The model name is Dishes, as requested
+class Dishes(models.Model): # Model name is Dishes as requested
     title = models.CharField(max_length=200, unique=True) # Unique title for the dish.
     slug = models.SlugField(max_length=200, unique=True) # URL-friendly identifier, unique for each dish.
     author = models.ForeignKey(
@@ -25,11 +25,12 @@ class Dishes(models.Model): # The model name is Dishes, as requested
     
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="dishes_in_category"
-    ) # Links to a Category; the category link is set to NULL if the category is deleted. Optional field.
+    ) # Links to a Category; category link is set to NULL if the category is deleted. Optional field.
 
     description = models.TextField(blank=True) # Optional short description of the dish.
-    # ingredients field removed as requested
-    # instructions field removed as requested
+    # ingredients = models.TextField(blank=True) # Detailed list of ingredients. REMOVED as requested.
+    # instructions = models.TextField(blank=True) # Preparation instructions for the dish. REMOVED as requested.
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00) # NEW: Price field for dishes.
     
     # Defines the publication status of the dish (Draft or Published).
     STATUS = ((0, "Draft"), (1, "Published"))
@@ -57,9 +58,10 @@ class Drink(models.Model):
     
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="drinks_in_category"
-    ) # Links to a Category; the category link is set to NULL if the category is deleted. Optional field.
+    ) # Links to a Category; category link is set to NULL if the category is deleted. Optional field.
 
     description = models.TextField(blank=True) # Optional short description of the drink.
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00) # NEW: Price field for drinks.
     # We don't need ingredients/instructions for drinks on the public menu
     
     # Defines the publication status of the drink (Draft or Published).
