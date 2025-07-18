@@ -31,7 +31,7 @@ DEBUG = 'DEBUG' in os.environ
 
 # ALLOWED_HOSTS for production deployment
 # Replace 'your-heroku-app-name.herokuapp.com' with your actual Heroku app name
-ALLOWED_HOSTS = ['the-cameroonian-table-app-38cd3afcabf7.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['the-cameroonian-table-app-38cd3afcabf7.herokuapp.com', 'localhost', '127.0.0.1'] # Added a comment to force deploy
 
 
 # Application definition
