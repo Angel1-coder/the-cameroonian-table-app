@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os # Imported for environment variable access
+import dj_database_url # Imported for parsing Heroku database URL
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@jnxveglf-f)(5wefm^(z%10d1mft-w)+=p_z5_nnzgai3@c1h'
+# Use environment variable for SECRET_KEY in production for security
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-secret-key-for-development-only') # Replace with my actual development key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG is True only if 'DEBUG' environment variable is set
+DEBUG = 'DEBUG' in os.environ
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS for production deployment
+# Replace 'your-heroku-app-name.herokuapp.com' with your actual Heroku app name
+ALLOWED_HOSTS = ['the-cameroonian-table-app-38cd3afcabf7.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -37,11 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dishes', #I've added my 'dishes' app to the list of installed applications.
+    'dishes', # I've added my 'dishes' app to the list of installed applications.
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Add WhiteNoise middleware for serving static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,11 +81,9 @@ WSGI_APPLICATION = 'my_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Use dj_database_url to parse the DATABASE_URL environment variable from Heroku
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age=600)
 }
 
 
@@ -117,6 +122,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+# STATIC_ROOT: The absolute path to the directory where collectstatic will gather static files for deployment.
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# WhiteNoise configuration for serving static files in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Media files (for user-uploaded content like images)
+# MEDIA_URL: The URL that will handle media served from MEDIA_ROOT.
+MEDIA_URL = '/media/'
+# MEDIA_ROOT: The absolute filesystem path to the directory that will hold user-uploaded files.
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
