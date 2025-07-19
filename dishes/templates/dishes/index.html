@@ -10,33 +10,35 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            background-color: #f8f8f8; /* Light background */
+            background-color: #fcfcfc; /* Sehr heller Hintergrund für den Körper */
             color: #333;
             line-height: 1.6;
+            scroll-behavior: smooth; /* Sanftes Scrollen für Anker-Links */
         }
 
         /* Navigation Bar */
         .navbar {
-            background-color: #ffffff; /* White background */
+            background-color: #ffffff; /* Weißer Hintergrund */
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 6px rgba(0,0,0,0.08); /* Weicherer Schatten */
             position: sticky;
             top: 0;
             z-index: 1000;
         }
         .navbar-brand {
-            font-family: 'Playfair Display', serif; /* Elegant font for brand */
-            color: #5a2d00; /* Dark brown for brand name */
+            font-family: 'Playfair Display', serif; /* Elegante Schrift für die Marke */
+            color: #5a2d00; /* Dunkelbraun für den Markennamen */
             font-size: 1.8em;
             font-weight: 700;
+            font-style: italic; /* NEU: Kursiv für den Markennamen */
             text-decoration: none;
             transition: color 0.2s ease-in-out;
         }
         .navbar-brand:hover {
-            color: #ff8c00; /* Orange on hover */
+            color: #ff8c00; /* Orange beim Hover */
         }
         .navbar-links {
             list-style: none;
@@ -48,7 +50,7 @@
             margin-left: 30px;
         }
         .navbar-links a {
-                color: #555;
+            color: #555;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.05em;
@@ -60,7 +62,7 @@
 
         /* Mobile Menu Toggle */
         .menu-toggle {
-            display: none; /* Hidden by default on desktop */
+            display: none; /* Standardmäßig auf dem Desktop ausgeblendet */
             font-size: 2em;
             cursor: pointer;
             color: #5a2d00;
@@ -79,11 +81,11 @@
             .navbar-links {
                 flex-direction: column;
                 width: 100%;
-                display: none; /* Hide by default */
+                display: none; /* Standardmäßig ausgeblendet */
                 margin-top: 15px;
             }
             .navbar-links.active {
-                display: flex; /* Show when active */
+                display: flex; /* Anzeigen, wenn aktiv */
             }
             .navbar-links li {
                 margin: 10px 0;
@@ -94,8 +96,8 @@
         /* Hero Section */
         .hero-section {
             position: relative;
-            height: 600px; /* Adjust height as needed */
-            background-image: url('https://placehold.co/1600x600/5A2D00/FFCC80?text=Authentic+Cameroonian+Cuisine'); /* Placeholder image */
+            height: 600px; /* Höhe nach Bedarf anpassen */
+            background-image: url('https://i.pinimg.com/736x/fc/6c/cf/fc6ccf6314f207173840e9e368cc20b0.jpg'); /* main picture of the restaurant */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -103,7 +105,7 @@
             justify-content: center;
             text-align: center;
             color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); /* Weicherer Schatten */
             margin-bottom: 50px;
         }
         .hero-overlay {
@@ -112,7 +114,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            background: rgba(0, 0, 0, 0.3); /* Leicht helleres Overlay für Textlesbarkeit */
             z-index: 1;
         }
         .hero-content {
@@ -125,24 +127,55 @@
             font-family: 'Playfair Display', serif;
             font-size: 4.5em;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
-            color: #ffcc80; /* Light orange for title */
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6); /* Weicherer Textschatten */
+            color: #ffcc80; /* Helles Orange für den Titel */
+            font-style: italic; /* NEU: Kursiv für den Haupttitel */
         }
         .hero-content p {
             font-size: 1.5em;
             line-height: 1.4;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+            text-shadow: 0.5px 0.5px 2px rgba(0,0,0,0.5); /* Weicherer Textschatten */
             color: #f0f0f0;
         }
 
-        /* Content Sections (Dishes, Drinks, Reservation) */
+        /* Gallery Section */
+        .gallery-section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+            background-color: #ffffff; /* Weißer Hintergrund */
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* Weicherer Schatten */
+            text-align: center;
+        }
+        .gallery-section .section-title {
+            margin-bottom: 30px;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .image-grid img {
+            width: 100%;
+            height: 200px; /* Feste Höhe für Bilder in der Galerie */
+            object-fit: cover; /* Bilder zuschneiden, um den Bereich auszufüllen */
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+        .image-grid img:hover {
+            transform: scale(1.03);
+        }
+
+        /* Content Sections (Menu, Reservation) */
         .content-section {
             padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto 50px auto;
             background-color: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
         .section-title {
             font-family: 'Playfair Display', serif;
@@ -165,76 +198,121 @@
             border-radius: 5px;
         }
 
-        /* Item Cards (Dishes & Drinks) */
-        .item-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        /* Menu List Styling (Tabular & Compact) */
+        .menu-list-container {
+            margin-top: 30px;
         }
-        .item-card {
-            background-color: #fefefe;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 25px;
+        .category-menu-block {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fefefe; /* Leicht hellerer Hintergrund für Kategorienblöcke */
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05); /* Sehr dezenter Schatten */
+        }
+        .category-menu-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em; /* Etwas kleiner als Haupttitel, aber immer noch prominent */
+            color: #c05d00; /* Dunkleres Orange für Kategorietitel */
             text-align: center;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 25px;
+            font-style: italic; /* NEU: Kursiv für Kategorietitel */
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .category-menu-block h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: #ff8c00;
+            border-radius: 5px;
+        }
+
+        .menu-items-list {
             display: flex;
             flex-direction: column;
+            gap: 15px; /* Abstand zwischen den Menüpunkten */
+        }
+        .menu-item {
+            display: flex;
+            flex-wrap: wrap; /* Ermöglicht Umbruch auf kleineren Bildschirmen */
             justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 10px;
+            border-bottom: 1px dotted #eee; /* Dezente Trennlinie */
         }
-        .item-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        .menu-item:last-child {
+            border-bottom: none; /* Keine Linie nach dem letzten Element */
         }
-        .item-card h2 {
-            font-family: 'Playfair Display', serif;
-            color: #c05d00;
-            margin-top: 0;
-            font-size: 2.2em;
-            margin-bottom: 10px;
-        }
-        .item-card .category {
-            font-style: italic;
-            color: #888;
-            font-size: 0.95em;
-            margin-bottom: 15px;
-        }
-        .item-card p {
-            font-size: 1.05em;
-            color: #555;
-            margin-bottom: 20px;
-            flex-grow: 1; /* Allows description to take available space */
-        }
-        .item-card .price {
-            font-size: 1.6em;
+        .item-title {
             font-weight: 700;
-            color: #ff8c00; /* Orange for price */
-            margin-top: 15px;
-            margin-bottom: 20px;
+            color: #5a2d00;
+            font-size: 1.1em;
+            flex-basis: 70%; /* Nimmt 70% der Breite ein */
+            text-align: left;
         }
-        .item-card a {
-            display: inline-block;
-            background-color: #5a2d00; /* Dark brown button */
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s ease-in-out;
-            margin-top: auto; /* Pushes button to the bottom */
+        .item-price {
+            font-weight: 700;
+            color: #ff8c00;
+            font-size: 1.1em;
+            flex-basis: 25%; /* Nimmt 25% der Breite ein */
+            text-align: right;
         }
-        .item-card a:hover {
-            background-color: #ff8c00; /* Orange on hover */
-        }
-        .item-card:active {
-            transform: translateY(0);
-        }
-        .no-items-message {
-            text-align: center;
-            padding: 50px;
-            font-size: 1.2em;
+        .item-description {
+            font-size: 0.9em;
             color: #777;
-            grid-column: 1 / -1; /* Span across all columns */
+            margin-top: 5px;
+            flex-basis: 100%; /* Nimmt die volle Breite ein */
+            text-align: left;
+        }
+        @media (max-width: 600px) {
+            .item-title, .item-price {
+                flex-basis: 100%; /* Auf kleinen Bildschirmen volle Breite */
+                text-align: left; /* Titel und Preis linksbündig */
+            }
+            .item-price {
+                margin-top: 5px; /* Abstand zum Titel */
+            }
+        }
+
+        /* Our Story Section */
+        .our-story-section {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .our-story-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: #5a2d00;
+            font-size: 3em;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .our-story-section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #ff8c00;
+            border-radius: 5px;
+        }
+        .our-story-section p {
+            font-size: 1.1em;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            text-align: left;
         }
 
         /* Reservation Section */
@@ -244,7 +322,7 @@
             margin: 50px auto;
             background-color: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             text-align: center;
         }
         .reservation-section h2 {
@@ -314,7 +392,7 @@
             outline: none;
         }
         .reservation-button {
-            grid-column: 1 / -1; /* Span across all columns */
+            grid-column: 1 / -1; /* Über alle Spalten spannen */
             background-color: #ff8c00;
             color: white;
             padding: 15px 30px;
@@ -343,7 +421,7 @@
             margin-top: 50px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
-            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 -1px 6px rgba(0,0,0,0.08);
         }
         .footer p {
             margin: 0;
@@ -376,11 +454,10 @@
             &#9776; <!-- Hamburger icon -->
         </div>
         <ul class="navbar-links" id="navbar-links">
-            <li><a href="#">Our Story</a></li>
-            <li><a href="#">Menu</a></li>
-            <li><a href="#">Reservations</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="#menu-section">Menu</a></li>
+            <li><a href="#gallery-section">Gallery</a></li>
+            <li><a href="#our-story-section">Our Story</a></li>
+            <li><a href="#reservation-section">Reservations</a></li>
         </ul>
     </nav>
 
@@ -393,47 +470,62 @@
         </div>
     </div>
 
-    <!-- Our Dishes Section -->
-    <div class="content-section">
-        <h2 class="section-title">Our Dishes</h2>
-        <div class="item-container">
-            {% for dish in dishes %}
-            <div class="item-card">
-                <h2>{{ dish.title }}</h2>
-                {% if dish.category %}
-                    <p class="category">{{ dish.category.name }}</p>
-                {% endif %}
-                <p>{{ dish.description|truncatechars:150 }}</p>
-                <p class="price">£{{ dish.price|floatformat:2 }}</p> {# HIER: Währungssymbol hinzugefügt #}
-                <a href="#">View Dish</a>
-            </div>
-            {% empty %}
-            <p class="no-items-message">No dishes found yet. Please add some in the admin panel!</p>
-            {% endfor %}
-        </div>
-
-    <!-- Our Drinks Section -->
-    <div class="content-section">
-        <h2 class="section-title">Our Drinks</h2>
-        <div class="item-container">
-            {% for drink in drinks %}
-            <div class="item-card">
-                <h2>{{ drink.title }}</h2>
-                {% if drink.category %}
-                    <p class="category">{{ drink.category.name }}</p>
-                {% endif %}
-                <p>{{ drink.description|truncatechars:150 }}</p>
-                <p class="price">£{{ drink.price|floatformat:2 }}</p> {# HIER: Währungssymbol hinzugefügt #}
-                <a href="#">View Drink</a>
-            </div>
-            {% empty %}
-            <p class="no-items-message">No drinks found yet. Please add some in the admin panel!</p>
-            {% endfor %}
+    <!-- Gallery Section -->
+    <div class="gallery-section" id="gallery-section">
+        <h2 class="section-title">Our Gallery</h2>
+        <div class="image-grid">
+            <img src="https://i.pinimg.com/736x/c2/fe/47/c2fe47a9788f4ff2c1a272ddcbada5ed.jpg" alt="[Bculture picture scene 1]">
+            <img src="https://i.pinimg.com/1200x/8f/a4/00/8fa40063836aba6f7ad86f4aebc55dc3.jpg" alt="[cultural picture scene 2]">
+            <img src="https://i.pinimg.com/736x/18/d3/10/18d3102e58527d82295a9d108a101405.jpg" alt="[cultural picture scene 3]">
+            <img src="https://i.pinimg.com/1200x/4c/5b/34/4c5b345f8aeff1c642156e2b579ba552.jpg" alt="[ cameroon's natinal dish ndoldé]">
+            <img src="https://i.pinimg.com/736x/05/e9/bc/05e9bc57b93dc024a63694a4ee52381c.jpg" alt="[Flowers and spacy showing the ambiant and elegance of the place]">
+            <img src="https://i.pinimg.com/736x/9b/ee/3b/9bee3b9f84f94155671ff3b43bfbcdc4.jpg" alt="[close shot bwith light talecloth and gold cutlery ]">
         </div>
     </div>
 
+    <!-- Menu Section (Consolidated and Tabular) -->
+    <div class="content-section" id="menu-section">
+        <h2 class="section-title">Our Menu</h2>
+
+        {% for category in categories %}
+            <div class="category-menu-block" id="category-{{ category.id }}">
+                <h3>{{ category.name }}</h3>
+                <div class="menu-items-list">
+                    {% for dish in dishes %}
+                        {% if dish.category == category %}
+                            <div class="menu-item">
+                                <span class="item-title">{{ dish.title }}</span>
+                                <span class="item-price">£{{ dish.price|floatformat:2 }}</span>
+                                <p class="item-description">{{ dish.description|truncatechars:100 }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% for drink in drinks %}
+                        {% if drink.category == category %}
+                            <div class="menu-item">
+                                <span class="item-title">{{ drink.title }}</span>
+                                <span class="item-price">£{{ drink.price|floatformat:2 }}</span>
+                                <p class="item-description">{{ drink.description|truncatechars:100 }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-items-message">No categories or menu items found yet. Please add some in the admin panel!</p>
+        {% endfor %}
+    </div>
+
+    <!-- Our Story Section -->
+    <div class="our-story-section" id="our-story-section">
+        <h2 class="section-title">Our Story</h2>
+        <p>Welcome to The Cameroonian Table, where every dish tells a story of heritage, passion, and the vibrant culinary traditions of Cameroon. Our journey began with a simple dream: to share the authentic flavors of our homeland with the world. From the bustling markets of Douala to the serene landscapes of the Mandara Mountains, Cameroonian cuisine is a rich tapestry of diverse influences, reflecting the country's unique position at the crossroads of Central and West Africa.</p>
+        <p>We believe food is more than just sustenance; it's a celebration of culture, community, and connection. Our chefs meticulously prepare each meal using traditional recipes passed down through generations, combined with fresh, locally sourced ingredients whenever possible. We are committed to bringing you an authentic taste of Cameroon, whether it's the hearty goodness of Ndolé, the aromatic spices of Poulet DG, or the refreshing zest of our homemade juices.</p>
+        <p>Thank you for joining us on this culinary adventure. We invite you to sit back, relax, and savor the true essence of The Cameroonian Table. Bon appétit!</p>
+    </div>
+
     <!-- Reservation Section -->
-    <div class="reservation-section">
+    <div class="reservation-section" id="reservation-section">
         <h2>Book Your Table</h2>
         <p>Experience the warmth of Cameroonian hospitality. Reserve your table now!</p>
         <form class="reservation-form">
@@ -484,4 +576,3 @@
     </script>
 </body>
 </html>
-
