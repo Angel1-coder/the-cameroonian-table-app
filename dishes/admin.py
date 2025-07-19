@@ -1,80 +1,85 @@
 # dishes/admin.py
 
 from django.contrib import admin
-# Importing our Category, Dishes, and Drink models.
-from .models import Category, Dishes, Drink 
+# Importiert jetzt sowohl das Dishes- als auch das Drink-Modell
+from .models import Category, Dishes, Drink # Importiert unsere Category-, Dishes- und Drink-Modelle.
 
-# Registering our models so they appear in the Django admin interface.
-# This makes Category, Dishes, and Drink manageable.
+# Registriert unsere Modelle, damit sie in der Django-Admin-Oberfläche erscheinen.
+# Dies macht Category, Dishes und Drink verwaltbar.
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    # Displays only the 'name' in the admin list view for Category objects.
+    # Zeigt nur den 'name' in der Admin-Listenansicht für Category-Objekte an.
     list_display = ('name',)
-    # Enables searching by category name in the admin.
+    # Ermöglicht die Suche nach Kategorienamen im Admin.
     search_fields = ('name',)
 
-@admin.register(Dishes) # Registering the Dishes model
-class DishesAdmin(admin.ModelAdmin): # Admin class name for Dishes
-    # Customizes which fields are displayed in the list of dishes in the admin.
-    list_display = ('title', 'category', 'status', 'created_on', 'author')
-    # Enables searching by title and description for dishes.
-    search_fields = ('title', 'description')
-    # Adds filters to the sidebar to filter dishes by status, creation date, and category.
+@admin.register(Dishes) # Registriert das Dishes-Modell
+class DishesAdmin(admin.ModelAdmin): # Admin-Klassenname für Dishes
+    # Passt an, welche Felder in der Liste der Gerichte im Admin angezeigt werden.
+    # 'ingredients' und 'instructions' wurden entfernt, 'price' ist enthalten.
+    list_display = ('title', 'category', 'price', 'status', 'created_on', 'author') # HIER: 'ingredients' und 'instructions' entfernt
+    # Ermöglicht die Suche nach Titel, Beschreibung und Preis für Gerichte.
+    # 'ingredients' und 'instructions' wurden entfernt.
+    search_fields = ('title', 'description', 'price') # HIER: 'ingredients' und 'instructions' entfernt
+    # Fügt Filter in der Seitenleiste hinzu, um Gerichte nach Status, Erstellungsdatum und Kategorie zu filtern.
     list_filter = ('status', 'created_on', 'category')
-    # This is very handy! When a title is entered, the slug field will automatically populate.
-    # This saves typing and helps with SEO-friendly URLs.
+    # Sehr praktisch! Wenn ein Titel eingegeben wird, wird das Slug-Feld automatisch ausgefüllt.
+    # Das spart Tipparbeit und hilft bei SEO-freundlichen URLs.
     prepopulated_fields = {'slug': ('title',)}
-    # Adds a date hierarchy to browse dishes by year, month, and day.
+    # Fügt eine Datums-Hierarchie hinzu, um Gerichte nach Jahr, Monat und Tag zu durchsuchen.
     date_hierarchy = 'created_on'
 
-    # --- Custom Admin Actions for Dishes ---
-    # Defines a custom action to set selected dishes to 'Published' status.
+    # --- Benutzerdefinierte Admin-Aktionen für Gerichte ---
+    # Definiert eine benutzerdefinierte Aktion, um ausgewählte Gerichte auf den Status 'Published' zu setzen.
     def change_status_to_published(self, request, queryset):
-        queryset.update(status=1) # Update the 'status' field to 1 (Published).
-        self.message_user(request, "Selected dishes successfully marked as Published.")
-    # The display name in the admin action dropdown.
-    change_status_to_published.short_description = "Mark selected dishes as Published" 
+        queryset.update(status=1) # Aktualisiert das Feld 'status' auf 1 (Published).
+        self.message_user(request, "Ausgewählte Gerichte erfolgreich als Veröffentlicht markiert.")
+    # Der Anzeigename im Admin-Aktions-Dropdown.
+    change_status_to_published.short_description = "Ausgewählte Gerichte als Veröffentlicht markieren" 
 
-    # Defines a custom action to set selected dishes to 'Draft' status.
+    # Definiert eine benutzerdefinierte Aktion, um ausgewählte Gerichte auf den Status 'Draft' zu setzen.
     def change_status_to_draft(self, request, queryset):
-        queryset.update(status=0) # Update the 'status' field to 0 (Draft).
-        self.message_user(request, "Selected dishes successfully marked as Draft.")
-    # The display name in the admin action dropdown.
-    change_status_to_draft.short_description = "Mark selected dishes as Draft" 
+        queryset.update(status=0) # Aktualisiert das Feld 'status' auf 0 (Draft).
+        self.message_user(request, "Ausgewählte Gerichte erfolgreich als Entwurf markiert.")
+    # Der Anzeigename im Admin-Aktions-Dropdown.
+    change_status_to_draft.short_description = "Ausgewählte Gerichte als Entwurf markieren" 
 
-    # List of custom actions to be displayed in the admin dropdown.
+    # Liste der benutzerdefinierten Aktionen, die im Admin-Dropdown angezeigt werden sollen.
+    # Die Standardaktion 'delete_selected' ist automatisch verfügbar.
     actions = ['change_status_to_published', 'change_status_to_draft']
 
 
-# Registering the Drink model
+# Registriert das Drink-Modell
 @admin.register(Drink)
-class DrinkAdmin(admin.ModelAdmin): # Admin class for Drink
-    # Customizes the fields displayed in the admin list view for Drink objects
-    list_display = ('title', 'category', 'status', 'created_on', 'author')
-    # Enables searching by title and description for drinks
-    search_fields = ('title', 'description')
-    # Adds filters for status, creation date, and category for drinks
+class DrinkAdmin(admin.ModelAdmin): # Admin-Klasse für Drink
+    # Passt die Felder an, die in der Admin-Listenansicht für Drink-Objekte angezeigt werden.
+    # 'price' ist enthalten.
+    list_display = ('title', 'category', 'price', 'status', 'created_on', 'author') # HIER: 'price' hinzugefügt
+    # Ermöglicht die Suche nach Titel, Beschreibung und Preis für Getränke.
+    search_fields = ('title', 'description', 'price') # HIER: 'price' hinzugefügt
+    # Fügt Filter für Status, Erstellungsdatum und Kategorie für Getränke hinzu.
     list_filter = ('status', 'created_on', 'category')
-    # Automatically populates the slug field from the title for drinks
+    # Füllt das Slug-Feld automatisch aus dem Titel für Getränke aus.
     prepopulated_fields = {'slug': ('title',)}
-    # Adds a date hierarchy for drinks
+    # Fügt eine Datums-Hierarchie hinzu, um Getränke nach Jahr, Monat und Tag zu durchsuchen.
     date_hierarchy = 'created_on'
 
-    # --- Custom Admin Actions for Drinks ---
-    # Defines a custom action to set selected drinks to 'Published' status.
+    # --- Benutzerdefinierte Admin-Aktionen für Getränke ---
+    # Definiert eine benutzerdefinierte Aktion, um ausgewählte Getränke auf den Status 'Published' zu setzen.
     def change_status_to_published(self, request, queryset):
-        queryset.update(status=1) # Update the 'status' field to 1 (Published).
-        self.message_user(request, "Selected drinks successfully marked as Published.")
-    # The display name in the admin action dropdown.
-    change_status_to_published.short_description = "Mark selected drinks as Published" 
+        queryset.update(status=1) # Aktualisiert das Feld 'status' auf 1 (Published).
+        self.message_user(request, "Ausgewählte Getränke erfolgreich als Veröffentlicht markiert.")
+    # Der Anzeigename im Admin-Aktions-Dropdown.
+    change_status_to_published.short_description = "Ausgewählte Getränke als Veröffentlicht markieren" 
 
-    # Defines a custom action to set selected drinks to 'Draft' status.
+    # Definiert eine benutzerdefinierte Aktion, um ausgewählte Getränke auf den Status 'Draft' zu setzen.
     def change_status_to_draft(self, request, queryset):
-        queryset.update(status=0) # Update the 'status' field to 0 (Draft).
-        self.message_user(request, "Selected drinks successfully marked as Draft.")
-    # The display name in the admin action dropdown.
-    change_status_to_draft.short_description = "Mark selected drinks as Draft" 
+        queryset.update(status=0) # Aktualisiert das Feld 'status' auf 0 (Draft).
+        self.message_user(request, "Ausgewählte Getränke erfolgreich als Entwurf markiert.")
+    # Der Anzeigename im Admin-Aktions-Dropdown.
+    change_status_to_draft.short_description = "Ausgewählte Getränke als Entwurf markieren" 
 
-    # List of custom actions to be displayed in the admin dropdown.
+    # Liste der benutzerdefinierten Aktionen, die im Admin-Dropdown angezeigt werden sollen.
+    # Die Standardaktion 'delete_selected' ist automatisch verfügbar.
     actions = ['change_status_to_published', 'change_status_to_draft']
