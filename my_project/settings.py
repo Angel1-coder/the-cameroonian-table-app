@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Use environment variable for SECRET_KEY in production for security
-SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-secret-key-for-development-only') # Replace with my actual development key
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-secret-key-for-development-only') # Replace with your actual development key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG is True only if 'DEBUG' environment variable is set
@@ -31,7 +31,7 @@ DEBUG = 'DEBUG' in os.environ
 
 # ALLOWED_HOSTS for production deployment
 # Replace 'your-heroku-app-name.herokuapp.com' with your actual Heroku app name
-ALLOWED_HOSTS = ['the-cameroonian-table-app-38cd3afcabf7.herokuapp.com', 'localhost', '127.0.0.1'] # Added a comment to force deploy
+ALLOWED_HOSTS = ['the-cameroonian-table-app-38cd3afcabf7.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dishes', # I've added my 'dishes' app to the list of installed applications.
+    'dishes', # Make sure your app name is listed here
 ]
 
 MIDDLEWARE = [
@@ -56,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'my_project.urls'
 
@@ -122,6 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+# HIER WURDE STATICFILES_DIRS HINZUGEFÜGT:
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'), # Dies ist für projektweite statische Dateien
+]
 # STATIC_ROOT: The absolute path to the directory where collectstatic will gather static files for deployment.
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
