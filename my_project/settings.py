@@ -43,6 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # NEW: Added django.contrib.sites for allauth
+    # Allauth apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'dishes', # Make sure your app name is listed here
 ]
 
@@ -55,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware', # Allauth Account Middleware
 ]
 
 
@@ -64,7 +70,7 @@ ROOT_URLCONF = 'my_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'], # Django will now look for templates here
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,6 +145,33 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 # MEDIA_ROOT: The absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# Allauth settings - UPDATED FOR DEPRECATED WARNINGS
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1 # Required by allauth
+
+# Allauth specific settings - UPDATED
+ACCOUNT_LOGIN_METHODS = ['username', 'email'] # Replaces ACCOUNT_AUTHENTICATION_METHOD
+ACCOUNT_EMAIL_VERIFICATION = 'none' # 'mandatory' for email verification, 'none' for no verification
+
+# New way to configure signup fields, replaces ACCOUNT_EMAIL_REQUIRED, ACCOUNT_USERNAME_REQUIRED, ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE
+# The warning suggests this format to explicitly mark fields as required
+ACCOUNT_SIGNUP_FIELDS = ['username', 'email*', 'email2*'] 
+
+# New way to configure rate limits, replaces ACCOUNT_LOGIN_ATTEMPTS_LIMIT/TIMEOUT
+ACCOUNT_RATE_LIMITS = {
+    'login_failed': '5/5m' # 5 failed login attempts within 5 minutes
+}
+
+ACCOUNT_LOGOUT_REDIRECT_URL = '/' # Redirect to homepage after logout
+LOGIN_REDIRECT_URL = '/' # Redirect to homepage after successful login
 
 
 # Default primary key field type

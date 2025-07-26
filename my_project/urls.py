@@ -9,6 +9,7 @@ from dishes import views as dishes_views
 urlpatterns = [
     path('', dishes_views.index, name='home'),
     path('admin/', admin.site.urls),
+     path('accounts/', include('allauth.urls')), # Allauth URLs for authentication
 ]
 
 # This block is used to serve media files (like images) during development.

@@ -1,138 +1,105 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Cameroonian Table - Authentic Cuisine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Link to external CSS file -->
-    <link rel="stylesheet" href="{% static 'dishes/style.css' %}">
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <a href="#" class="navbar-brand">The Cameroonian Table</a>
-        <div class="menu-toggle" id="mobile-menu">
-            &#9776; <!-- Hamburger icon -->
+{% extends "base.html" %}
+    {% load static %}
+
+    {% block head_title %}The Cameroonian Table - Home{% endblock %}
+
+    {% block content %}
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Experience Authentic Cameroonian Cuisine</h1>
+                <p>Savor the rich, vibrant flavors from the heart of Africa. A culinary journey awaits you.</p>
+            </div>
         </div>
-        <ul class="navbar-links" id="navbar-links">
-            <li><a href="#menu-section">Menu</a></li>
-            <li><a href="#gallery-section">Gallery</a></li>
-            <li><a href="#our-story-section">Our Story</a></li>
-            <li><a href="#reservation-section">Reservations</a></li>
-        </ul>
-    </nav>
 
-    <!-- Hero Section -->
-    <div class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>Experience Authentic Cameroonian Cuisine</h1>
-            <p>Savor the rich, vibrant flavors from the heart of Africa. A culinary journey awaits you.</p>
+        <!-- Gallery Section -->
+        <div class="gallery-section" id="gallery-section">
+            <h2 class="section-title">Our Gallery</h2>
+            <div class="image-grid">
+                <img src="https://i.pinimg.com/736x/c2/fe/47/c2fe47a9788f4ff2c1a272ddcbada5ed.jpg" alt="[Bculture picture scene 1]">
+                <img src="https://i.pinimg.com/1200x/8f/a4/00/8fa40063836aba6f7ad86f4aebc55dc3.jpg" alt="[cultural picture scene 2]">
+                <img src="https://i.pinimg.com/736x/18/d3/10/18d3102e58527d82295a9d108a101405.jpg" alt="[cultural picture scene 3]">
+                <img src="https://i.pinimg.com/1200x/4c/5b/34/4c5b345f8aeff1c642156e2b579ba552.jpg" alt="[ cameroon's natinal dish ndoldé]">
+                <img src="https://i.pinimg.com/736x/05/e9/bc/05e9bc57b93dc024a63694a4ee52381c.jpg" alt="[Flowers and spacy showing the ambiant and elegance of the place]">
+                <img src="https://i.pinimg.com/736x/9b/ee/3b/9bee3b9f84f94155671ff3b43bfbcdc4.jpg" alt="[close shot bwith light talecloth and gold cutlery ]">
+                <img src="https://i.pinimg.com/736x/1d/11/c8/1d11c859b37d1124b4ce7d0b1fe94fc4.jpg" alt="[african art picture ]">
+                <img src="https://i.pinimg.com/1200x/3b/73/93/3b73939053eb9a7c8e0ff1351a84ee99.jpg" alt="[african dessert ]">
+            </div>
         </div>
-    </div>
 
-    <!-- Gallery Section -->
-    <div class="gallery-section" id="gallery-section">
-        <h2 class="section-title">Our Gallery</h2>
-        <div class="image-grid">
-            <img src="https://i.pinimg.com/736x/c2/fe/47/c2fe47a9788f4ff2c1a272ddcbada5ed.jpg" alt="[Bculture picture scene 1]">
-            <img src="https://i.pinimg.com/1200x/8f/a4/00/8fa40063836aba6f7ad86f4aebc55dc3.jpg" alt="[cultural picture scene 2]">
-            <img src="https://i.pinimg.com/736x/18/d3/10/18d3102e58527d82295a9d108a101405.jpg" alt="[cultural picture scene 3]">
-            <img src="https://i.pinimg.com/1200x/4c/5b/34/4c5b345f8aeff1c642156e2b579ba552.jpg" alt="[ cameroon's natinal dish ndoldé]">
-            <img src="https://i.pinimg.com/736x/05/e9/bc/05e9bc57b93dc024a63694a4ee52381c.jpg" alt="[Flowers and spacy showing the ambiant and elegance of the place]">
-            <img src="https://i.pinimg.com/736x/9b/ee/3b/9bee3b9f84f94155671ff3b43bfbcdc4.jpg" alt="[close shot bwith light talecloth and gold cutlery ]">
-            <img src="https://i.pinimg.com/736x/1d/11/c8/1d11c859b37d1124b4ce7d0b1fe94fc4.jpg" alt="[african art picture ]">
-            <img src="https://i.pinimg.com/1200x/3b/73/93/3b73939053eb9a7c8e0ff1351a84ee99.jpg" alt="[african dessert ]">
-        </div>
-    </div>
+        <!-- Menu Section (Consolidated and Tabular) -->
+        <div class="content-section" id="menu-section">
+            <h2 class="section-title">Our Menu</h2>
 
-    <!-- Menu Section (Consolidated and Tabular) -->
-    <div class="content-section" id="menu-section">
-        <h2 class="section-title">Our Menu</h2>
-
-        {% for category in categories %}
-            <div class="category-menu-block" id="category-{{ category.id }}">
-                <h3>{{ category.name }}</h3>
-                <div class="menu-items-list">
-                    {% for dish in dishes %}
-                        {% if dish.category == category %}
-                            <div class="menu-item">
-                                <span class="item-title">{{ dish.title }}</span>
-                                <span class="item-price">£{{ dish.price|floatformat:2 }}</span>
-                                <p class="item-description">{{ dish.description|truncatechars:100 }}</p>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                    {% for drink in drinks %}
-                        {% if drink.category == category %}
-                            <div class="menu-item">
-                                <span class="item-title">{{ drink.title }}</span>
-                                <span class="item-price">£{{ drink.price|floatformat:2 }}</span>
-                                <p class="item-description">{{ drink.description|truncatechars:100 }}</p>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+            {% for category in categories %}
+                <div class="category-menu-block" id="category-{{ category.id }}">
+                    <h3>{{ category.name }}</h3>
+                    <div class="menu-items-list">
+                        {% for dish in dishes %}
+                            {% if dish.category == category %}
+                                <div class="menu-item">
+                                    <span class="item-title">{{ dish.title }}</span>
+                                    <span class="item-price">£{{ dish.price|floatformat:2 }}</span>
+                                    <p class="item-description">{{ dish.description|truncatechars:100 }}</p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% for drink in drinks %}
+                            {% if drink.category == category %}
+                                <div class="menu-item">
+                                    <span class="item-title">{{ drink.title }}</span>
+                                    <span class="item-price">£{{ drink.price|floatformat:2 }}</span>
+                                    <p class="item-description">{{ drink.description|truncatechars:100 }}</p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-        {% empty %}
-            <p class="no-items-message">No categories or menu items found yet. Please add some in the admin panel!</p>
-        {% endfor %}
-    </div>
+            {% empty %}
+                <p class="no-items-message">No categories or menu items found yet. Please add some in the admin panel!</p>
+            {% endfor %}
+        </div>
 
-    <!-- Our Story Section -->
-    <div class="our-story-section" id="our-story-section">
-        <h2 class="section-title">Our Story</h2>
-        <p>Welcome to The Cameroonian Table, where every dish tells a story of heritage, passion, and the vibrant culinary traditions of Cameroon. Our journey began with a simple dream: to share the authentic flavors of our homeland with the world. From the bustling markets of Douala to the serene landscapes of the Mandara Mountains, Cameroonian cuisine is a rich tapestry of diverse influences, reflecting the country's unique position at the crossroads of Central and West Africa.</p>
-        <p>We believe food is more than just sustenance; it's a celebration of culture, community, and connection. Our chefs meticulously prepare each meal using traditional recipes passed down through generations, combined with fresh, locally sourced ingredients whenever possible. We are committed to bringing you an authentic taste of Cameroon, whether it's the hearty goodness of Ndolé, the aromatic spices of Poulet DG, or the refreshing zest of our homemade juices.</p>
-        <p>Thank you for joining us on this culinary adventure. We invite you to sit back, relax, and savor the true essence of The Cameroonian Table. Bon appétit!</p>
-    </div>
+        <!-- Our Story Section -->
+        <div class="our-story-section" id="our-story-section">
+            <h2 class="section-title">Our Story</h2>
+            <p>Welcome to The Cameroonian Table, where every dish tells a story of heritage, passion, and the vibrant culinary traditions of Cameroon. Our journey began with a simple dream: to share the authentic flavors of our homeland with the world. From the bustling markets of Douala to the serene landscapes of the Mandara Mountains, Cameroonian cuisine is a rich tapestry of diverse influences, reflecting the country's unique position at the crossroads of Central and West Africa.</p>
+            <p>We believe food is more than just sustenance; it's a celebration of culture, community, and connection. Our chefs meticulously prepare each meal using traditional recipes passed down through generations, combined with fresh, locally sourced ingredients whenever possible. We are committed to bringing you an authentic taste of Cameroon, whether it's the hearty goodness of Ndolé, the aromatic spices of Poulet DG, or the refreshing zest of our homemade juices.</p>
+            <p>Thank you for joining us on this culinary adventure. We invite you to sit back, relax, and savor the true essence of The Cameroonian Table. Bon appétit!</p>
+        </div>
 
-    <!-- Reservation Section -->
-    <div class="reservation-section" id="reservation-section">
-        <h2>Book Your Table</h2>
-        <p>Experience the warmth of Cameroonian hospitality. Reserve your table now!</p>
-        <form class="reservation-form">
-            <div class="form-group">
-                <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
-            <div class="form-group">
-                <label for="guests">Number of Guests:</label>
-                <input type="number" id="guests" name="guests" min="1" value="2" required>
-            </div>
-            <div class="form-group">
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required>
-            </div>
-            <div class="form-group">
-                <label for="time">Time:</label>
-                <input type="time" id="time" name="time" required>
-            </div>
-            <button type="submit" class="reservation-button full-width">Make Reservation</button>
-        </form>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 The Cameroonian Table. All rights reserved.</p>
-        <ul class="footer-links">
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Sitemap</a></li>
-        </ul>
-    </footer>
-
-    <!-- Link to external JavaScript file -->
-    <script src="{% static 'dishes/script.js' %}"></script>
-</body>
-</html>
+        <!-- Reservation Section -->
+        <div class="reservation-section" id="reservation-section">
+            <h2>Book Your Table</h2>
+            <p>Experience the warmth of Cameroonian hospitality. Reserve your table now!</p>
+            <form class="reservation-form">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests:</label>
+                    <input type="number" id="guests" name="guests" min="1" value="2" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time:</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+                <button type="submit" class="reservation-button full-width">Make Reservation</button>
+            </form>
+        </div>
+    {% endblock content %}
+    
