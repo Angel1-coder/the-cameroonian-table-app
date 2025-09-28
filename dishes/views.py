@@ -1,8 +1,9 @@
 # dishes/views.py
 
-from django.shortcuts import render
-# Import your Dishes and Drink models to access the database
-from .models import Dishes, Category, Drink # Imports our Dishes, Category, and Drink models.
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import Dishes, Category, Drink, Reservation
+from .forms import ReservationForm
 
 def index(request):
     # Retrieve all published dishes from the database.
@@ -39,11 +40,24 @@ def index(request):
             # This prevents errors if the list doesn't exactly match DB categories.
             pass
 
+    # Handle reservation form submission
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Reservation submitted successfully! We will contact you soon.')
+            return redirect('home')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = ReservationForm()
+
     # The context to be passed to the template.
     context = {
         'dishes': dishes,
         'drinks': drinks, # Adds drinks to the context.
         'categories': ordered_categories, # NEW: Adds categories in the custom order to the context.
+        'form': form, # Add reservation form to context
     }
     
     # Renders the 'index.html' template and passes the context.

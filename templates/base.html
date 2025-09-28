@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -445,6 +446,36 @@
         .footer-links a:hover {
             color: #fff;
         }
+
+        /* Alert Messages */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .error {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        /* User Welcome Message */
+        .user-welcome {
+            color: #ff8c00;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
     </style>
 </head>
 <body>
@@ -460,6 +491,7 @@
             <li><a href="{% url 'home' %}#our-story-section">Our Story</a></li>
             <li><a href="{% url 'home' %}#reservation-section">Reservations</a></li>
             {% if user.is_authenticated %}
+                <li><span class="user-welcome">Welcome, {{ user.username }}!</span></li>
                 <li><a href="{% url 'account_logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'account_signup' %}">Register</a></li>
@@ -491,6 +523,11 @@
             navbarLinks.classList.toggle('active');
         });
     </script>
+    
+    <!-- JavaScript tests (only in development) -->
+    {% if debug %}
+    <script src="{% static 'dishes/test_script.js' %}"></script>
+    {% endif %}
 </body>
 </html>
 

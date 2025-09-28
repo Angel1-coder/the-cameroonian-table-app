@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware', # Allauth Account Middleware
+    # 'allauth.account.middleware.AccountMiddleware', # Allauth Account Middleware - Commented out for testing
 ]
 
 

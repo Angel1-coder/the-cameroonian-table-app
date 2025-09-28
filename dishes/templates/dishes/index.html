@@ -73,30 +73,59 @@
         <div class="reservation-section" id="reservation-section">
             <h2>Book Your Table</h2>
             <p>Experience the warmth of Cameroonian hospitality. Reserve your table now!</p>
-            <form class="reservation-form">
+            
+            <!-- Display messages -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <form class="reservation-form" method="post">
+                {% csrf_token %}
                 <div class="form-group">
-                    <label for="name">Your Name:</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="{{ form.name.id_for_label }}">Your Name:</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                        <div class="error">{{ form.name.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="{{ form.email.id_for_label }}">Email:</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="error">{{ form.email.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone:</label>
-                    <input type="tel" id="phone" name="phone">
+                    <label for="{{ form.phone.id_for_label }}">Phone:</label>
+                    {{ form.phone }}
+                    {% if form.phone.errors %}
+                        <div class="error">{{ form.phone.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="guests">Number of Guests:</label>
-                    <input type="number" id="guests" name="guests" min="1" value="2" required>
+                    <label for="{{ form.guests.id_for_label }}">Number of Guests:</label>
+                    {{ form.guests }}
+                    {% if form.guests.errors %}
+                        <div class="error">{{ form.guests.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" required>
+                    <label for="{{ form.date.id_for_label }}">Date:</label>
+                    {{ form.date }}
+                    {% if form.date.errors %}
+                        <div class="error">{{ form.date.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="time">Time:</label>
-                    <input type="time" id="time" name="time" required>
+                    <label for="{{ form.time.id_for_label }}">Time:</label>
+                    {{ form.time }}
+                    {% if form.time.errors %}
+                        <div class="error">{{ form.time.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <button type="submit" class="reservation-button full-width">Make Reservation</button>
             </form>
